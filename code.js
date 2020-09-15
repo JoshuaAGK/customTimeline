@@ -24,6 +24,9 @@ function loadJson() {
 }
 
 function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
+    var temp = document.getElementById("verified-icon");
+    var verifiedImg = temp.content.cloneNode(true);
+    
     var innerTweet = document.createElement("div");
     innerTweet.className = "inner-tweet";
     
@@ -43,6 +46,11 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
     tweetName.className = "tweet-name";
     tweetName.appendChild(document.createTextNode(name + " "));
     tweetContent.appendChild(tweetName);
+    
+    if (verified) {
+        tweetContent.appendChild(verifiedImg);
+        
+    }
     
     var tweetUser = document.createElement("div");
     tweetUser.className = "tweet-user";
