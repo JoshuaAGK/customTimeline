@@ -1,0 +1,66 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.twitter-frame {
+    width: 50vw;
+    height: 600px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    font-family: system-ui;
+    line-height: 1.3125;
+    background-color: #15202b;
+    color: white;
+}
+
+.inner-tweet {
+    width: 100%;
+    display: grid;
+    grid-template-columns: calc(75px) auto;
+    grid-template-rows: auto;
+}
+
+.profile-image {
+    padding: 0.5rem;
+}
+
+.profile-image img {
+    width: calc(75px - 0.5rem);
+    border-radius: 100%;
+}
+
+.tweet-name, .tweet-user, .tweet-time {
+    display: inline;
+}
+
+.tweet-user, .tweet-time {
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+.tweet-content {
+    padding: 0.5rem;
+}
+
+.tweet-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.tweet-text {
+    margin-top: 0.25em;
+}
+
+.tweet-user::after {
+  content: " ·";
+}
+
+.verified-icon {
+    height: 1.2em;
+    width: 1.2em;
+    position: relative;
+    top: 4px;
+}
