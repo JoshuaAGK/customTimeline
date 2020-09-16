@@ -81,15 +81,18 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     var messageText = "";
     tweetText.className = "tweet-text";
     
-    
-    var result = msg.split(" ")
+    // A long but easy way of splitting on space or newline.
+    var result = msg.split(" ").join(",").split("\n").join(',').split(',')
     var handles = [];
     for (var i = 0; i < result.length; i++) {
         var urlParse = document.createElement('a');
         urlParse.href = result[i];
+        console.log(result[i])
         
         if (result[i].charAt(0) == "@") {
             handles.push("<a class='innerLink' href='https://www.twitter.com/" + result[i].substring(1) + "'>" + result[i] + "</a>");
+        } else if (result[i].charAt(0) == "#") {
+            handles.push("<a class='innerLink' href='https://www.twitter.com/hashtag/" + result[i].substring(1) + "'>" + result[i] + "</a>");
         } else if (urlParse.hostname != "localhost") {
             handles.push("<a class='innerLink' href='" + result[i] + "'>" + result[i] + "</a>")
         } else {
