@@ -40,7 +40,7 @@ function prepRequest() {
     // Check target type (@handle, #hashtag, or search)
     if (target.charAt(0) == "@" && target.length > 1) {
         url += "?screenname=" + target.substring(1);
-    } else if (target.charAt(0) == "#" && regExp.test(result[i])) {
+    } else if (target.charAt(0) == "#" && regExp.test(target)) {
         url += "?hashtag=" + target.substring(1);
     } else {
         url += "?search=" + target;
