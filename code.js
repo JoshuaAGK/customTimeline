@@ -1,6 +1,6 @@
 function onload() {
     loadJson();
-    //refreshTweets();
+    refreshTweets();
 }
 
 function refreshTweets() {
@@ -24,7 +24,7 @@ function xhrget(url) {
 
 function loadJson() {
     // Using @Twitter as an example for now.
-    url = "getter.php/?screenname=elonmusk"
+    url = "getter.php/?screenname=twitter"
     xhrget(url)
 }
 
@@ -85,8 +85,13 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     var result = msg.split(" ")
     var handles = [];
     for (var i = 0; i < result.length; i++) {
+        var urlParse = document.createElement('a');
+        urlParse.href = result[i];
+        
         if (result[i].charAt(0) == "@") {
-            handles.push("<a class='handle' href='https://www.twitter.com/" + result[i].substring(1) + "'>" + result[i] + "</a>");
+            handles.push("<a class='innerLink' href='https://www.twitter.com/" + result[i].substring(1) + "'>" + result[i] + "</a>");
+        } else if (urlParse.hostname != "localhost") {
+            handles.push("<a class='innerLink' href='" + result[i] + "'>" + result[i] + "</a>")
         } else {
             handles.push(result[i]);
         }
@@ -94,7 +99,6 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     
     messageText = handles.join(" ");
     tweetText.innerHTML = messageText;
-    console.log(messageText);
     tweetContent.appendChild(tweetText);
     
     
