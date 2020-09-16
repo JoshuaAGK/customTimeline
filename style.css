@@ -23,11 +23,16 @@
     flex-direction: column;
     font-family: system-ui;
     line-height: 1.3125;
-    background-color: #15202b;
-    color: white;
+    background-color: white;
+    color: black;
     overflow-x: hidden;
     overflow-y: scroll;
     border: 1px solid #37444d;
+}
+
+.twitter-frame.dark {
+    background-color: #15202b;
+    color: white;
 }
 
 .twitter-frame .inner-tweet {
@@ -57,13 +62,22 @@
     border-radius: 100%;
 }
 
-.twitter-frame .tweet-name, .tweet-user, .tweet-time {
+.twitter-frame .tweet-name,
+.twitter-frame .tweet-user,
+.twitter-frame .tweet-time {
     display: inline;
 }
 
-.twitter-frame .tweet-user, .tweet-time {
-    opacity: 0.5;
-    font-weight: 300;
+.twitter-frame .tweet-user,
+.twitter-frame .tweet-time {
+    color: #657786;
+    font-weight: 400;
+}
+
+.twitter-frame.dark .tweet-user,
+.twitter-frame.dark .tweet-time {
+    color: #8898a6;
+    
 }
 
 .twitter-frame .tweet-content {
@@ -71,8 +85,12 @@
 }
 
 .twitter-frame .tweet-name {
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.25rem;
+}
+
+.twitter-frame.dark .tweet-name {
+    font-weight: 600;
 }
 
 .twitter-frame .tweet-text {
@@ -88,6 +106,12 @@
     width: 1.2em;
     position: relative;
     top: 4px;
-    filter: grayscale(1000%);
+    filter: grayscale(0);
+    filter: brightness(1);
+    
+}
+
+.twitter-frame.dark .verified-icon {
+    filter: grayscale(100%);
     filter: brightness(100);
 }
