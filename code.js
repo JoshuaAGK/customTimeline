@@ -17,10 +17,9 @@ function xhrget(url) {
     xhttp.onreadystatechange = function() {
         // Check status codes
         if (xhttp.readyState == 4 && xhttp.status >= 200) {
-            console.log(xhttp.responseText);
-            //parsedjs = JSON.parse(xhttp.responseText);
+            parsedjs = JSON.parse(xhttp.responseText);
             // Format returned JSON
-            //formatJson(parsedjs);
+            formatJson(parsedjs);
         }
     };
     xhttp.send();
