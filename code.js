@@ -147,7 +147,7 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
             linkList.push("<a class='innerLink' href='https://www.twitter.com/" + splitMsg[i].substring(1) + "'>" + splitMsg[i] + "</a>");
         } else if (splitMsg[i].charAt(0) == "#" && regExp.test(splitMsg[i])) {
             linkList.push("<a class='innerLink' href='https://www.twitter.com/hashtag/" + splitMsg[i].substring(1) + "'>" + splitMsg[i] + "</a>");
-        } else if (urlParse.hostname != "localhost") {
+        } else if (urlParse.hostname != "localhost" && urlParse.hostname != "") {
             linkList.push("<a class='innerLink' href='" + splitMsg[i] + "'>" + splitMsg[i] + "</a>")
         } else {
             linkList.push(splitMsg[i]);
