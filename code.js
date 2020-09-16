@@ -1,7 +1,7 @@
 // Run on load
 function onload() {
     prepRequest();
-    refreshTweets();
+    //refreshTweets();
 }
 
 // Run prepRequest every 30 seconds
@@ -141,13 +141,13 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
         
         // Returns true if any letters present. Hashtags require at least 1 letter.
         var regExp = /[a-zA-Z]/g;
-        
+                
         // Check type (@handle, #hashtag, search, or plain text), and add href if appropriate.
         if (splitMsg[i].charAt(0) == "@" && splitMsg[i].length > 1) {
             linkList.push("<a class='innerLink' href='https://www.twitter.com/" + splitMsg[i].substring(1) + "'>" + splitMsg[i] + "</a>");
         } else if (splitMsg[i].charAt(0) == "#" && regExp.test(splitMsg[i])) {
             linkList.push("<a class='innerLink' href='https://www.twitter.com/hashtag/" + splitMsg[i].substring(1) + "'>" + splitMsg[i] + "</a>");
-        } else if (urlParse.hostname != "localhost" && urlParse.hostname != "") {
+        } else if (urlParse.hostname != window.location.hostname && urlParse.hostname != "") {
             linkList.push("<a class='innerLink' href='" + splitMsg[i] + "'>" + splitMsg[i] + "</a>")
         } else {
             linkList.push(splitMsg[i]);
@@ -197,6 +197,7 @@ function formatJson(parsedjs) {
     
     // Iterating backwards through Tweets, because
     // most-recent goes at the top, not the bottom
+    //for (var i = parsedjs.length - 1; i >= 0; i--) {
     for (var i = parsedjs.length - 1; i >= 0; i--) {
         var currentElement = parsedjs[i];
         var msg = currentElement.full_text;
