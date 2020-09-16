@@ -42,8 +42,11 @@ function loadJson() {
 }
 
 function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
-    var temp = document.getElementById("verified-icon");
-    var verifiedImg = temp.content.cloneNode(true);
+    //var temp = document.getElementById("verified-icon");
+    //var verifiedImg = temp.content.cloneNode(true);
+    
+    
+    
     
     var innerTweet = document.createElement("div");
     innerTweet.className = "inner-tweet";
@@ -72,12 +75,20 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     var tweetName = document.createElement("a");
     tweetName.className = "tweet-name";
     tweetName.setAttribute("href","https://www.twitter.com/" + screenname);
-    tweetName.appendChild(document.createTextNode(name + " "));
+    tweetName.appendChild(document.createTextNode(name));
     tweetContent.appendChild(tweetName);
     
+    tweetContent.appendChild(document.createTextNode(" "))
+    
     if (verified) {
-        tweetContent.appendChild(verifiedImg);
+        var verifiedIcon = document.createElement("img");
+        verifiedIcon.className = "verified-icon";
+        verifiedIcon.src = "https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg"
+        verifiedIcon.innerHTML = verifiedIcon;
+        tweetContent.appendChild(verifiedIcon);
     }
+    
+    tweetContent.appendChild(document.createTextNode(" "))
     
     var tweetUser = document.createElement("a");
     tweetUser.className = "tweet-user";
@@ -85,9 +96,11 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     tweetUser.appendChild(document.createTextNode("@" + screenname));
     tweetContent.appendChild(tweetUser);
     
+    tweetContent.appendChild(document.createTextNode(" "))
+    
     var tweetTime = document.createElement("div");
     tweetTime.className = "tweet-time";
-    tweetTime.appendChild(document.createTextNode(" " + time));
+    tweetTime.appendChild(document.createTextNode(time));
     tweetContent.appendChild(tweetTime);
     
     var tweetText = document.createElement("div");

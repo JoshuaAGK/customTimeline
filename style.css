@@ -1,28 +1,19 @@
-* {
+.twitter-frame, .twitter-frame * {
     padding: 0;
     margin: 0;
 }
 
-body {
-    background-color: #15202b;
-}
-
-a {
+.twitter-frame a {
     color: inherit;
     text-decoration: inherit;
 }
 
-a:hover {
+.twitter-frame a:hover {
     text-decoration: underline;
 }
 
-.innerLink {
+.twitter-frame .innerLink {
     color: #1DA1F2;
-}
-
-#frame-wrapper {
-    width: 400px;
-    height: 600px;
 }
 
 .twitter-frame {
@@ -39,7 +30,7 @@ a:hover {
     border: 1px solid #37444d;
 }
 
-.inner-tweet {
+.twitter-frame .inner-tweet {
     width: 100%;
     display: grid;
     grid-template-columns: 75px auto;
@@ -47,20 +38,17 @@ a:hover {
     padding-bottom: 0.5rem;
 }
 
-.inner-tweet:not(:last-child) {
+.twitter-frame .inner-tweet:not(:last-child) {
     border-bottom: 1px solid #37444d;
 }
 
-.profile-image {
-}
-
-.profile-image img {
+.twitter-frame .profile-image img {
     width: calc(75px - 1rem);
     height: calc(75px - 1rem);
     object-fit: cover;
 }
 
-.profile-wrapper {
+.twitter-frame .profile-wrapper {
     width: calc(75px - 1rem);
     height: calc(75px - 1rem);
     margin-left: 0.5rem;
@@ -69,35 +57,37 @@ a:hover {
     border-radius: 100%;
 }
 
-.tweet-name, .tweet-user, .tweet-time {
+.twitter-frame .tweet-name, .tweet-user, .tweet-time {
     display: inline;
 }
 
-.tweet-user, .tweet-time {
+.twitter-frame .tweet-user, .tweet-time {
     opacity: 0.5;
     font-weight: 300;
 }
 
-.tweet-content {
+.twitter-frame .tweet-content {
     padding: 0.5rem;
 }
 
-.tweet-name {
+.twitter-frame .tweet-name {
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
 
-.tweet-text {
+.twitter-frame .tweet-text {
     margin-top: 0.25em;
 }
 
-.tweet-user::after {
-  content: " ·";
+.twitter-frame .tweet-time::before {
+    content: "· ";
 }
 
-.verified-icon {
+.twitter-frame .verified-icon {
     height: 1.2em;
     width: 1.2em;
     position: relative;
     top: 4px;
+    filter: grayscale(1000%);
+    filter: brightness(100);
 }
