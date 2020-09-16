@@ -50,7 +50,7 @@ function prepRequest() {
     xhrget(url)
 }
 
-// Build DOM elements to Twitter frame.
+// Build DOM elements to Twitter frame
 function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     // .inner-tweet (Tweet container)
     var innerTweet = document.createElement("div");
