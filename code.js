@@ -38,7 +38,7 @@ function prepRequest() {
     var regExp = /[a-zA-Z]/g;
     
     // Check target type (@handle, #hashtag, or search)
-    if (target.charAt(0) == "@") {
+    if (target.charAt(0) == "@" && splitMsg[i].length > 1) {
         url += "?screenname=" + target.substring(1);
     } else if (target.charAt(0) == "#" && regExp.test(result[i])) {
         url += "?hashtag=" + target.substring(1);
@@ -143,7 +143,7 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
         var regExp = /[a-zA-Z]/g;
         
         // Check type (@handle, #hashtag, search, or plain text), and add href if appropriate.
-        if (splitMsg[i].charAt(0) == "@") {
+        if (splitMsg[i].charAt(0) == "@" && splitMsg[i].length > 1) {
             linkList.push("<a class='innerLink' href='https://www.twitter.com/" + splitMsg[i].substring(1) + "'>" + splitMsg[i] + "</a>");
         } else if (splitMsg[i].charAt(0) == "#" && regExp.test(splitMsg[i])) {
             linkList.push("<a class='innerLink' href='https://www.twitter.com/hashtag/" + splitMsg[i].substring(1) + "'>" + splitMsg[i] + "</a>");
