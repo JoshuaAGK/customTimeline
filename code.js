@@ -15,16 +15,17 @@ function xhrget(url) {
 
 function loadJson() {
     // Using @Twitter as an example for now.
-    url = "getter.php/?screenname=twitter"
+    url = "getter.php/?screenname=corssoff"
     xhrget(url)
 }
 
-function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
+function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     var temp = document.getElementById("verified-icon");
     var verifiedImg = temp.content.cloneNode(true);
     
     var innerTweet = document.createElement("div");
     innerTweet.className = "inner-tweet";
+    innerTweet.setAttribute("id", id);
     
     var profileImage = document.createElement("div");
     profileImage.className = "profile-image";
@@ -41,6 +42,7 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
     var tweetContent = document.createElement("div");
     tweetContent.className = "tweet-content";
     innerTweet.appendChild(tweetContent)
+    
     
     var tweetName = document.createElement("div");
     tweetName.className = "tweet-name";
@@ -67,7 +69,19 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
     tweetContent.appendChild(tweetText);
     
     var twitterFrame = document.getElementsByClassName("twitter-frame")[0];
-    twitterFrame.appendChild(innerTweet);
+    
+    var tweetMatch = false;
+    var existingTweets = document.getElementsByClassName("inner-tweet");
+    for (var i = 0; i < existingTweets.length; i++) {
+        if (existingTweets[i].getAttribute("id") == id) {
+            tweetMatch = true;
+        }
+    }
+    
+    if (!tweetMatch) {
+        twitterFrame.appendChild(innerTweet);
+    }
+    
 }
 
 function formatJson(parsedjs) {
@@ -79,17 +93,16 @@ function formatJson(parsedjs) {
         var screenname = currentElement.user.screen_name;
         var iconURL = currentElement.user.profile_image_url_https;
         iconURL = iconURL.replace("_normal", "");
-        var verified = currentElement.user.verified;
-        
+        var verified = currentElement.user.verified;        
+        var time = timeAgo(currentElement.created_at);
+        var id = currentElement.id;
         var msg = currentElement.full_text;
         // Message decoding ("&amp;" -> "&", etc)
         var temp = document.createElement('textarea');
         temp.innerHTML = msg;
         msg = temp.value;
-        
-        var time = timeAgo(currentElement.created_at);
 
-        writeNewTweet(name, screenname, time, iconURL, msg, verified)
+        writeNewTweet(name, screenname, time, iconURL, msg, verified, id)
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 // Twitter URL
-$curlURL = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=20&tweet_mode=extended&screen_name=';
+$curlURL = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=5&tweet_mode=extended&screen_name=';
 
 // Get URL parameters, add to cURL URL.
 $curlURL .= htmlspecialchars($_GET["screenname"]);
