@@ -33,11 +33,13 @@
 .twitter-frame.dark {
     background-color: #15202b;
     color: white;
+    border: 1px solid #38444d;
 }
 
 .twitter-frame.black {
     background-color: black;
     color: white;
+    border: 1px solid #2f3336;
 }
 
 .twitter-frame .inner-tweet {
@@ -51,6 +53,17 @@
 .twitter-frame .inner-tweet:not(:last-child) {
     border-bottom: 1px solid #37444d;
 }
+
+.twitter-frame.dark .inner-tweet:not(:last-child) {
+    border-bottom: 1px solid #38444d;
+}
+
+.twitter-frame.black .inner-tweet:not(:last-child) {
+    border-bottom: 1px solid #2f3336;
+}
+
+
+
 
 .twitter-frame .profile-image img {
     width: calc(75px - 1rem);
