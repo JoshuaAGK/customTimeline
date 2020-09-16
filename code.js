@@ -1,3 +1,12 @@
+function onload() {
+    loadJson();
+    refreshTweets();
+}
+
+function refreshTweets() {
+    refresher = setInterval(loadJson, 1000);
+}
+
 // GET request
 function xhrget(url) {
     var xhttp = new XMLHttpRequest();
@@ -75,18 +84,26 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     
     
     
-    var tweetMatch = false;
-    var existingTweets = document.getElementsByClassName("inner-tweet");
-    for (var i = 0; i < existingTweets.length; i++) {
-        if (existingTweets[i].getAttribute("id") == id) {
-            tweetMatch = true;
-        }
-    }
     
-    if (!tweetMatch) {
+    
+    
+    
+    if (!tweetMatch(id)) {
         addToFrame(innerTweet);
     }
     
+    
+}
+
+function tweetMatch(id) {
+    var tweetMatchBool = false
+    var existingTweets = document.getElementsByClassName("inner-tweet");
+    for (var i = 0; i < existingTweets.length; i++) {
+        if (existingTweets[i].getAttribute("id") == id) {
+            tweetMatchBool = true;
+        }
+    }
+    return tweetMatchBool;
 }
 
 function addToFrame(tweet) {
@@ -95,9 +112,9 @@ function addToFrame(tweet) {
 }
 
 function formatJson(parsedjs) {
+    updateTweetTime(parsedjs);
     for (var i = parsedjs.length - 1; i >= 0; i--) {
         var currentElement = parsedjs[i];
-        console.log(currentElement);
 
         var name = currentElement.user.name;
         var screenname = currentElement.user.screen_name;
@@ -116,6 +133,22 @@ function formatJson(parsedjs) {
     }
 }
 
+function updateTweetTime(tweetArray) {
+    //console.log(tweetArray);
+    
+    for (var i = 0; i < tweetArray.length; i++) {
+        var id = tweetArray[i].id;
+        
+        var timeStr = timeAgo(tweetArray[i].created_at);
+        
+        if (tweetMatch(id)){
+            var tweetOnPage = document.getElementById(id);
+            var timeOnTweet = tweetOnPage.getElementsByClassName("tweet-time")[0];
+            timeOnTweet.innerHTML = " " + timeStr;
+        }
+    }
+}
+
 
 function timeAgo(timeString) {
     var epochTime = Date.parse(timeString);
@@ -125,7 +158,9 @@ function timeAgo(timeString) {
     timeDifference /= 1000 // Time since post in seconds
     var returnTime = "";
     
-    if (timeDifference < 60) { // Less than a minute ago
+    if (timeDifference < 1) { // Less than a second ago
+        returnTime = "now";
+    } else if (timeDifference < 60) { // Minute ago
         returnTime = Math.floor(timeDifference) + "s";
     } else if (timeDifference < 3600) { // Hour ago
         returnTime = Math.floor(timeDifference / 60) + "m";
