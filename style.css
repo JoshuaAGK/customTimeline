@@ -35,6 +35,11 @@
     color: white;
 }
 
+.twitter-frame.black {
+    background-color: black;
+    color: white;
+}
+
 .twitter-frame .inner-tweet {
     width: 100%;
     display: grid;
@@ -77,7 +82,11 @@
 .twitter-frame.dark .tweet-user,
 .twitter-frame.dark .tweet-time {
     color: #8898a6;
-    
+}
+
+.twitter-frame.black .tweet-user,
+.twitter-frame.black .tweet-time {
+    color: #6e767d;
 }
 
 .twitter-frame .tweet-content {
@@ -90,6 +99,10 @@
 }
 
 .twitter-frame.dark .tweet-name {
+    font-weight: 600;
+}
+
+.twitter-frame.black .tweet-name {
     font-weight: 600;
 }
 
@@ -112,6 +125,11 @@
 }
 
 .twitter-frame.dark .verified-icon {
+    filter: grayscale(100%);
+    filter: brightness(100);
+}
+
+.twitter-frame.black .verified-icon {
     filter: grayscale(100%);
     filter: brightness(100);
 }
