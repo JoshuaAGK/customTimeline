@@ -23,7 +23,7 @@ $curlData = curl_init($curlURL);
 // Set $curl_data's header
 curl_setopt($curlData, CURLOPT_HTTPHEADER,
     array(
-        'authorization: Bearer AAAAAAAAAAAAAAAAAAAAAIDlHgEAAAAASCzPjJvtMKQw7Yzamn8CJFXkm%2Bk%3DjDwEjAIpO0HbNWWgAJJyImZiDsSrppD1DOoanTMbwKHqxBZqaO'
+        'authorization: Bearer AAAAAAAAAAAAAAAAAAAAAHEHHwEAAAAA%2BhcbvSywji%2B8UM0oD0buQ3XSxsw%3DrNCJFzuJgbFFBuxXM18MBafFsekL5au1tNWVbA0os0tzM9DWK1'
     )
 );
 

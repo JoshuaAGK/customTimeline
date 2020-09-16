@@ -12,4 +12,8 @@ This also supports `#hashtags` and all Twitter search terms.
 
 The timeline is sized to 100% width and height by default, so you can resize its container if desired.
 
+By default the timeline uses the same light theme as Twitter.
+
 To use the Twitter dark theme, add the class `dark` to the div.
+
+To use the Twitter black theme, add the class `black` to the div.
