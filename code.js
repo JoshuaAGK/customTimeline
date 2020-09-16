@@ -17,14 +17,28 @@ function xhrget(url) {
         if (xhttp.readyState == 4 && xhttp.status >= 200) {
             parsedjs = JSON.parse(xhttp.responseText);
             formatJson(parsedjs);
+//            console.log(xhttp.responseText);
         }
     };
     xhttp.send();
 }
 
 function loadJson() {
-    // Using @Twitter as an example for now.
-    url = "getter.php/?screenname=twitter"
+    var url = "getter.php"
+    
+    var twitterFrame = document.getElementsByClassName("twitter-frame")[0];
+    var target = twitterFrame.getAttribute("target");
+    
+    if (target.charAt(0) == "@") {
+        url += "?screenname=" + target.substring(1);
+    } else if (target.charAt(0) == "#") {
+        url += "?hashtag=" + target.substring(1);
+    } else {
+        url += "?search=" + target;
+    }
+    
+    
+    
     xhrget(url)
 }
 
@@ -87,7 +101,6 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     for (var i = 0; i < result.length; i++) {
         var urlParse = document.createElement('a');
         urlParse.href = result[i];
-        console.log(result[i])
         
         if (result[i].charAt(0) == "@") {
             handles.push("<a class='innerLink' href='https://www.twitter.com/" + result[i].substring(1) + "'>" + result[i] + "</a>");
@@ -135,9 +148,25 @@ function addToFrame(tweet) {
 }
 
 function formatJson(parsedjs) {
+    
+    
+    // Check if result is from a search (not a timeline)
+    if ('statuses' in parsedjs) {
+        parsedjs = parsedjs.statuses;
+    }
+    
+    console.log(parsedjs)
+    
     updateTweetTime(parsedjs);
     for (var i = parsedjs.length - 1; i >= 0; i--) {
         var currentElement = parsedjs[i];
+        
+        
+        var msg = currentElement.full_text;
+        
+        if (currentElement.retweeted_status != null) {
+            msg = currentElement.retweeted_status.full_text;
+        }
 
         var name = currentElement.user.name;
         var screenname = currentElement.user.screen_name;
@@ -146,7 +175,7 @@ function formatJson(parsedjs) {
         var verified = currentElement.user.verified;        
         var time = timeAgo(currentElement.created_at);
         var id = currentElement.id;
-        var msg = currentElement.full_text;
+        
         // Message decoding ("&amp;" -> "&", etc)
         var temp = document.createElement('textarea');
         temp.innerHTML = msg;

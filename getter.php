@@ -1,9 +1,25 @@
 <?php
-// Twitter URL
-$curlURL = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=50&tweet_mode=extended&screen_name=';
 
-// Get URL parameters, add to cURL URL.
-$curlURL .= htmlspecialchars($_GET["screenname"]);
+$curlURL = "";
+
+$curlName = htmlspecialchars($_GET["screenname"]);
+$curlHashtag = htmlspecialchars($_GET["hashtag"]);
+$curlSearch = htmlspecialchars($_GET["search"]);
+
+//echo $curlName;
+//echo $curlHashtag;
+
+if (!$curlName == "") {
+    $curlURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=";
+    $curlURL .= $curlName;
+} elseif (!$curlHashtag == "") {
+    $curlURL = "https://api.twitter.com/1.1/search/tweets.json?tweet_mode=extended&q=%23";
+    $curlURL .= $curlHashtag;
+} else {
+    $curlURL = "https://api.twitter.com/1.1/search/tweets.json?tweet_mode=extended&q=";
+    $curlURL .= $curlSearch;
+}
+
 
 // Init cURL session as curl_data
 $curlData = curl_init($curlURL);

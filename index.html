@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--#1DA1F2-->
 <html lang="en-gb">
     <head>
         <title>Twitter Feed Test</title>
@@ -12,7 +11,8 @@
     </head>
     <body onload="onload()">
         <button type="button" onclick="loadJson()">Request data</button>
-        <div class="twitter-frame">
+        <div id="frame-wrapper">
+            <div class="twitter-frame" target="@twitter"></div>
         </div>
     </body>
 </html>
