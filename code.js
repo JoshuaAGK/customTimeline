@@ -22,14 +22,9 @@ function xhrget(url) {
     xhttp.send();
 }
 
-
-
-// TODO
-// Append newly-loaded Tweets to top of list rather than bottom
-
 function loadJson() {
     // Using @Twitter as an example for now.
-    url = "getter.php/?screenname=twitter"
+    url = "getter.php/?screenname=elonmusk"
     xhrget(url)
 }
 
@@ -51,6 +46,9 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     
     var profileImgageImg = document.createElement("img");
     profileImgageImg.src = iconURL;
+    profileImgageImg.style.cursor = "pointer";
+    profileImgageImg.setAttribute("onclick","location.href='https://www.twitter.com/" + screenname + "';");
+    
     profileWrapper.appendChild(profileImgageImg);
     
     var tweetContent = document.createElement("div");
@@ -58,8 +56,9 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     innerTweet.appendChild(tweetContent)
     
     
-    var tweetName = document.createElement("div");
+    var tweetName = document.createElement("a");
     tweetName.className = "tweet-name";
+    tweetName.setAttribute("href","https://www.twitter.com/" + screenname);
     tweetName.appendChild(document.createTextNode(name + " "));
     tweetContent.appendChild(tweetName);
     
@@ -67,8 +66,9 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
         tweetContent.appendChild(verifiedImg);
     }
     
-    var tweetUser = document.createElement("div");
+    var tweetUser = document.createElement("a");
     tweetUser.className = "tweet-user";
+    tweetUser.setAttribute("href","https://www.twitter.com/" + screenname);
     tweetUser.appendChild(document.createTextNode("@" + screenname));
     tweetContent.appendChild(tweetUser);
     
@@ -138,6 +138,7 @@ function updateTweetTime(tweetArray) {
     //console.log(tweetArray);
     
     for (var i = 0; i < tweetArray.length; i++) {
+        console.log(tweetArray[i]);
         var id = tweetArray[i].id;
         
         var timeStr = timeAgo(tweetArray[i].created_at);

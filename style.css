@@ -7,6 +7,15 @@ body {
     background-color: #15202b;
 }
 
+a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .twitter-frame {
     width: 400px;
     height: 600px;
@@ -50,7 +59,6 @@ body {
     margin-top: 0.5rem;
     overflow: hidden;
     border-radius: 100%;
-    
 }
 
 .tweet-name, .tweet-user, .tweet-time {
