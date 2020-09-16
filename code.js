@@ -4,7 +4,7 @@ function onload() {
 }
 
 function refreshTweets() {
-    refresher = setInterval(loadJson, 1000);
+    refresher = setInterval(loadJson, 30000);
 }
 
 // GET request
@@ -24,13 +24,13 @@ function xhrget(url) {
 
 function loadJson() {
     var url = "getter.php"
-    
     var twitterFrame = document.getElementsByClassName("twitter-frame")[0];
     var target = twitterFrame.getAttribute("target");
+    var regExp = /[a-zA-Z]/g;
     
     if (target.charAt(0) == "@") {
         url += "?screenname=" + target.substring(1);
-    } else if (target.charAt(0) == "#") {
+    } else if (target.charAt(0) == "#" && regExp.test(result[i])) {
         url += "?hashtag=" + target.substring(1);
     } else {
         url += "?search=" + target;
@@ -101,9 +101,12 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
         var urlParse = document.createElement('a');
         urlParse.href = result[i];
         
+        
+        var regExp = /[a-zA-Z]/g;
+        
         if (result[i].charAt(0) == "@") {
             handles.push("<a class='innerLink' href='https://www.twitter.com/" + result[i].substring(1) + "'>" + result[i] + "</a>");
-        } else if (result[i].charAt(0) == "#") {
+        } else if (result[i].charAt(0) == "#" && regExp.test(result[i])) {
             handles.push("<a class='innerLink' href='https://www.twitter.com/hashtag/" + result[i].substring(1) + "'>" + result[i] + "</a>");
         } else if (urlParse.hostname != "localhost") {
             handles.push("<a class='innerLink' href='" + result[i] + "'>" + result[i] + "</a>")
@@ -183,8 +186,7 @@ function formatJson(parsedjs) {
     }
 }
 
-function updateTweetTime(tweetArray) {
-    
+function updateTweetTime(tweetArray) {    
     for (var i = 0; i < tweetArray.length; i++) {
         var id = tweetArray[i].id;
         
