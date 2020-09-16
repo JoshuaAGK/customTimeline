@@ -1,37 +1,31 @@
 <?php
 
 // Read all parameters from GET request
-$curlName = htmlspecialchars($_GET["screenname"]);
-$curlHashtag = htmlspecialchars($_GET["hashtag"]);
-$curlSearch = htmlspecialchars($_GET["search"]);
+$getName = htmlspecialchars($_GET["screenname"]);
+$getHashtag = htmlspecialchars($_GET["hashtag"]);
+$getSearch = htmlspecialchars($_GET["search"]);
+
 
 // Check which parameter is being used, and apply correct URL
-if (!$curlName == "") {
-    $curlURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=";
-    $curlURL .= $curlName;
-} elseif (!$curlHashtag == "") {
-    $curlURL = "https://api.twitter.com/1.1/search/tweets.json?tweet_mode=extended&q=%23";
-    $curlURL .= $curlHashtag;
+if (!$getName == "") {
+    $getURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=";
+    $getURL .= $getName;
+} elseif (!$getHashtag == "") {
+    $getURL = "https://api.twitter.com/1.1/search/tweets.json?tweet_mode=extended&q=%23";
+    $getURL .= $getHashtag;
 } else {
-    $curlURL = "https://api.twitter.com/1.1/search/tweets.json?tweet_mode=extended&q=";
-    $curlURL .= $curlSearch;
+    $getURL = "https://api.twitter.com/1.1/search/tweets.json?tweet_mode=extended&q=";
+    $getURL .= $getSearch;
 }
 
-// Initialise cURL session as curl_data
-$curlData = curl_init($curlURL);
-
-// Set $curl_data's header
-curl_setopt($curlData, CURLOPT_HTTPHEADER,
-    array(
-        'authorization: Bearer AAAAAAAAAAAAAAAAAAAAAHEHHwEAAAAA%2BhcbvSywji%2B8UM0oD0buQ3XSxsw%3DrNCJFzuJgbFFBuxXM18MBafFsekL5au1tNWVbA0os0tzM9DWK1'
-    )
+// GET request (without using cURL!)
+$options = array (
+    'http' => array (
+        'header'  => "authorization: Bearer AAAAAAAAAAAAAAAAAAAAAHEHHwEAAAAA%2BhcbvSywji%2B8UM0oD0buQ3XSxsw%3DrNCJFzuJgbFFBuxXM18MBafFsekL5au1tNWVbA0os0tzM9DWK1",
+        'method'  => 'GET',
+    ),
 );
+$context  = stream_context_create($options);
+$returnData = file_get_contents($getURL, false, $context);
 
-// Enable data return to $curl_data
-curl_setopt($curlData, CURLOPT_RETURNTRANSFER, true);
-
-// Execute cURL
-$returnData = curl_exec($curlData);
-
-// Echo returned data
 echo $returnData;
