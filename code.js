@@ -13,6 +13,11 @@ function xhrget(url) {
     xhttp.send();
 }
 
+
+
+// TODO
+// Append newly-loaded Tweets to top of list rather than bottom
+
 function loadJson() {
     // Using @Twitter as an example for now.
     url = "getter.php/?screenname=corssoff"
@@ -68,7 +73,7 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     tweetText.appendChild(document.createTextNode(msg));
     tweetContent.appendChild(tweetText);
     
-    var twitterFrame = document.getElementsByClassName("twitter-frame")[0];
+    
     
     var tweetMatch = false;
     var existingTweets = document.getElementsByClassName("inner-tweet");
@@ -79,13 +84,18 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     }
     
     if (!tweetMatch) {
-        twitterFrame.appendChild(innerTweet);
+        addToFrame(innerTweet);
     }
     
 }
 
+function addToFrame(tweet) {
+    var twitterFrame = document.getElementsByClassName("twitter-frame")[0];
+    twitterFrame.appendChild(tweet);
+}
+
 function formatJson(parsedjs) {
-    for (var i = 0; i < parsedjs.length; i++) {
+    for (var i = parsedjs.length - 1; i >= 0; i--) {
         var currentElement = parsedjs[i];
         console.log(currentElement);
 

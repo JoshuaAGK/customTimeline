@@ -20,6 +20,8 @@ body {
     overflow-y: scroll;
     border: 1px solid #37444d;
     resize: both;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
 }
 
 .inner-tweet {
@@ -30,7 +32,7 @@ body {
     padding-bottom: 0.5rem;
 }
 
-.inner-tweet:not(:last-child) {
+.inner-tweet:not(:first-child) {
     border-bottom: 1px solid #37444d;
 }
 
