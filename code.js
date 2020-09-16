@@ -1,7 +1,7 @@
 // Run on load
 function onload() {
     prepRequest();
-    //refreshTweets();
+    refreshTweets();
 }
 
 // Run prepRequest every 30 seconds
@@ -197,7 +197,6 @@ function formatJson(parsedjs) {
     
     // Iterating backwards through Tweets, because
     // most-recent goes at the top, not the bottom
-    //for (var i = parsedjs.length - 1; i >= 0; i--) {
     for (var i = parsedjs.length - 1; i >= 0; i--) {
         var currentElement = parsedjs[i];
         var msg = currentElement.full_text;
