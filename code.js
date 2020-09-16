@@ -1,6 +1,6 @@
 function onload() {
     loadJson();
-    refreshTweets();
+    //refreshTweets();
 }
 
 function refreshTweets() {
@@ -78,8 +78,23 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified, id) {
     tweetContent.appendChild(tweetTime);
     
     var tweetText = document.createElement("div");
+    var messageText = "";
     tweetText.className = "tweet-text";
-    tweetText.appendChild(document.createTextNode(msg));
+    
+    
+    var result = msg.split(" ")
+    var handles = [];
+    for (var i = 0; i < result.length; i++) {
+        if (result[i].charAt(0) == "@") {
+            handles.push("<a class='handle' href='https://www.twitter.com/" + result[i].substring(1) + "'>" + result[i] + "</a>");
+        } else {
+            handles.push(result[i]);
+        }
+    }
+    
+    messageText = handles.join(" ");
+    tweetText.innerHTML = messageText;
+    console.log(messageText);
     tweetContent.appendChild(tweetText);
     
     
@@ -138,7 +153,7 @@ function updateTweetTime(tweetArray) {
     //console.log(tweetArray);
     
     for (var i = 0; i < tweetArray.length; i++) {
-        console.log(tweetArray[i]);
+//        console.log(tweetArray[i]);
         var id = tweetArray[i].id;
         
         var timeStr = timeAgo(tweetArray[i].created_at);
