@@ -38,7 +38,7 @@ function prepRequest() {
     var regExp = /[a-zA-Z]/g;
     
     // Check target type (@handle, #hashtag, or search)
-    if (target.charAt(0) == "@" && splitMsg[i].length > 1) {
+    if (target.charAt(0) == "@" && target.length > 1) {
         url += "?screenname=" + target.substring(1);
     } else if (target.charAt(0) == "#" && regExp.test(result[i])) {
         url += "?hashtag=" + target.substring(1);
