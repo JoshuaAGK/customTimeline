@@ -29,7 +29,7 @@ function xhrget(url) {
 
 function loadJson() {
     // Using @Twitter as an example for now.
-    url = "getter.php/?screenname=corssoff"
+    url = "getter.php/?screenname=twitter"
     xhrget(url)
 }
 
@@ -108,7 +108,8 @@ function tweetMatch(id) {
 
 function addToFrame(tweet) {
     var twitterFrame = document.getElementsByClassName("twitter-frame")[0];
-    twitterFrame.appendChild(tweet);
+    twitterFrame.insertBefore(tweet, twitterFrame.firstChild);
+    //twitterFrame.appendChild(tweet);
 }
 
 function formatJson(parsedjs) {
