@@ -1,14 +1,11 @@
 <?php
 
-$curlURL = "";
-
+// Read all parameters from GET request
 $curlName = htmlspecialchars($_GET["screenname"]);
 $curlHashtag = htmlspecialchars($_GET["hashtag"]);
 $curlSearch = htmlspecialchars($_GET["search"]);
 
-//echo $curlName;
-//echo $curlHashtag;
-
+// Check which parameter is being used, and apply correct URL
 if (!$curlName == "") {
     $curlURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=";
     $curlURL .= $curlName;
@@ -20,8 +17,7 @@ if (!$curlName == "") {
     $curlURL .= $curlSearch;
 }
 
-
-// Init cURL session as curl_data
+// Initialise cURL session as curl_data
 $curlData = curl_init($curlURL);
 
 // Set $curl_data's header
