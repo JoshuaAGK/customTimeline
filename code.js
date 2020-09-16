@@ -13,12 +13,9 @@ function xhrget(url) {
     xhttp.send();
 }
 
-//stevejobsceo vertical
-//stevewoz horizontal
-
 function loadJson() {
     // Using @Twitter as an example for now.
-    url = "getter.php/?screenname=twitter"
+    url = "getter.php/?screenname=stevewoz"
     xhrget(url)
 }
 
@@ -74,19 +71,26 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
 }
 
 function formatJson(parsedjs) {
-    console.log(parsedjs[0]);
-    var currentElement = parsedjs[0];
-    
-    var name = currentElement.user.name;
-    var screenname = currentElement.user.screen_name;
-    var iconURL = currentElement.user.profile_image_url_https;
-    iconURL = iconURL.replace("_normal", "");
-    var verified = currentElement.user.verified;
-    var msg = currentElement.text;    
-    var time = timeAgo(currentElement.created_at);
-    
-    writeNewTweet(name, screenname, time, iconURL, msg, verified)
-    
+    for (var i = 0; i < parsedjs.length; i++) {
+        console.log(parsedjs[i]);
+        var currentElement = parsedjs[i];
+
+        var name = currentElement.user.name;
+        var screenname = currentElement.user.screen_name;
+        var iconURL = currentElement.user.profile_image_url_https;
+        iconURL = iconURL.replace("_normal", "");
+        var verified = currentElement.user.verified;
+        
+        var msg = currentElement.text;
+        // Message decoding ("&amp;" -> "&", etc)
+        var temp = document.createElement('textarea');
+        temp.innerHTML = msg;
+        msg = temp.value;
+        
+        var time = timeAgo(currentElement.created_at);
+
+        writeNewTweet(name, screenname, time, iconURL, msg, verified)
+    }
 }
 
 

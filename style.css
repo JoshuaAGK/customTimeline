@@ -7,12 +7,13 @@
     width: 50vw;
     height: 600px;
     display: flex;
-    flex-direction: column-reverse;
-    justify-content: flex-end;
+    flex-direction: column;
     font-family: system-ui;
     line-height: 1.3125;
     background-color: #15202b;
     color: white;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .inner-tweet {
