@@ -13,14 +13,13 @@ function xhrget(url) {
     xhttp.send();
 }
 
+//stevejobsceo vertical
+//stevewoz horizontal
 
 function loadJson() {
     // Using @Twitter as an example for now.
     url = "getter.php/?screenname=twitter"
     xhrget(url)
-    
-    
-    //writeNewTweet("Steve", "steveMC", "10y", "https://pbs.twimg.com/profile_images/1301535420468072449/su9UImD1.jpg", "Don't dig straight down, you'll regret that.", true);
 }
 
 function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
@@ -34,9 +33,13 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
     profileImage.className = "profile-image";
     innerTweet.appendChild(profileImage)
     
+    var profileWrapper = document.createElement("div");
+    profileWrapper.className = "profile-wrapper";
+    profileImage.appendChild(profileWrapper);
+    
     var profileImgageImg = document.createElement("img");
     profileImgageImg.src = iconURL;
-    profileImage.appendChild(profileImgageImg);
+    profileWrapper.appendChild(profileImgageImg);
     
     var tweetContent = document.createElement("div");
     tweetContent.className = "tweet-content";
@@ -49,7 +52,6 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
     
     if (verified) {
         tweetContent.appendChild(verifiedImg);
-        
     }
     
     var tweetUser = document.createElement("div");

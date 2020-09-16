@@ -6,7 +6,6 @@
 .twitter-frame {
     width: 50vw;
     height: 600px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column-reverse;
     justify-content: flex-end;
@@ -19,17 +18,27 @@
 .inner-tweet {
     width: 100%;
     display: grid;
-    grid-template-columns: calc(75px) auto;
+    grid-template-columns: 75px auto;
     grid-template-rows: auto;
 }
 
 .profile-image {
-    padding: 0.5rem;
 }
 
 .profile-image img {
-    width: calc(75px - 0.5rem);
+    width: calc(75px - 1rem);
+    height: calc(75px - 1rem);
+    object-fit: cover;
+}
+
+.profile-wrapper {
+    width: calc(75px - 1rem);
+    height: calc(75px - 1rem);
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    overflow: hidden;
     border-radius: 100%;
+    
 }
 
 .tweet-name, .tweet-user, .tweet-time {
