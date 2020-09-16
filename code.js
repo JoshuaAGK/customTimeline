@@ -15,7 +15,7 @@ function xhrget(url) {
 
 function loadJson() {
     // Using @Twitter as an example for now.
-    url = "getter.php/?screenname=stevewoz"
+    url = "getter.php/?screenname=twitter"
     xhrget(url)
 }
 
@@ -72,8 +72,8 @@ function writeNewTweet(name, screenname, time, iconURL, msg, verified) {
 
 function formatJson(parsedjs) {
     for (var i = 0; i < parsedjs.length; i++) {
-        console.log(parsedjs[i]);
         var currentElement = parsedjs[i];
+        console.log(currentElement);
 
         var name = currentElement.user.name;
         var screenname = currentElement.user.screen_name;
@@ -81,7 +81,7 @@ function formatJson(parsedjs) {
         iconURL = iconURL.replace("_normal", "");
         var verified = currentElement.user.verified;
         
-        var msg = currentElement.text;
+        var msg = currentElement.full_text;
         // Message decoding ("&amp;" -> "&", etc)
         var temp = document.createElement('textarea');
         temp.innerHTML = msg;
