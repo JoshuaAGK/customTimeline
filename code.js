@@ -17,7 +17,6 @@ function xhrget(url) {
         if (xhttp.readyState == 4 && xhttp.status >= 200) {
             parsedjs = JSON.parse(xhttp.responseText);
             formatJson(parsedjs);
-//            console.log(xhttp.responseText);
         }
     };
     xhttp.send();
@@ -155,7 +154,6 @@ function formatJson(parsedjs) {
         parsedjs = parsedjs.statuses;
     }
     
-    console.log(parsedjs)
     
     updateTweetTime(parsedjs);
     for (var i = parsedjs.length - 1; i >= 0; i--) {
@@ -186,10 +184,8 @@ function formatJson(parsedjs) {
 }
 
 function updateTweetTime(tweetArray) {
-    //console.log(tweetArray);
     
     for (var i = 0; i < tweetArray.length; i++) {
-//        console.log(tweetArray[i]);
         var id = tweetArray[i].id;
         
         var timeStr = timeAgo(tweetArray[i].created_at);
